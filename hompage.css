@@ -11,7 +11,9 @@
 #search-button {
     padding: 8px;
 }
-
+#searchedStock{
+    gap: 10px;
+}
 .stockDiv{
     border: 1px solid grey;
     width: 50%;
