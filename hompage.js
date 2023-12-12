@@ -2,30 +2,32 @@
 var searchedStock = document.getElementById("searchedStock"); 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    getStocks(); 
-});
-function getStocks() {
+// document.addEventListener("DOMContentLoaded", function() {
+//     getStocks(); 
+// });
+// function getStocks() {
   
-    const stocksString = localStorage.getItem("myStocks");
+//     const stocksString = localStorage.getItem("myStocks");
 
-    if (stocksString) {
+//     if (stocksString) {
    
-        const stocks = JSON.parse(stocksString);
+//         const stocks = JSON.parse(stocksString);
 
 
-        const stockListContainer = document.getElementById('stock-list');
+//         const stockListContainer = document.getElementById('stock-list');
 
 
-        stockListContainer.innerHTML = "";
+//         stockListContainer.innerHTML = "";
 
-        stocks.forEach(stock => {
-            const listItem = document.createElement('li');
-            listItem.textContent = stock;
-            stockListContainer.appendChild(listItem);
-        });
-    }
-}
+//         stocks.forEach(stock => {
+//             const listItem = document.createElement('li');
+//             listItem.textContent = stock;
+//             stockListContainer.appendChild(listItem);
+//         });
+//     }
+// }
+
+let stockData = []; 
 
 async function performSearch() {
 
@@ -67,10 +69,27 @@ async function performSearch() {
         searchedStock.appendChild(stockDiv);
         searchedStock.appendChild(buyBtn);
 
-        stockData = {
+        stockData.push({
             name: searchTerm,
-            price: result.price}
+            price: result.price,
+            owned: 0
+        });
         buyBtn.addEventListener("click", ()=>{
+
+            const existingStockIndex = stockData.findIndex(stock => stock.name === searchTerm);
+
+            if (existingStockIndex !== -1) {
+                
+                stockData[existingStockIndex].owned += 1;
+            } else {
+                
+                stockData.push({
+                    name: searchTerm,
+                    price: result.price,
+                    owned: 1 
+                });
+            }
+
             localStorage.setItem('myStocks', JSON.stringify(stockData));
         })
         
