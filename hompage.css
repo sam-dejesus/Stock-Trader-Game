@@ -11,12 +11,16 @@
 #search-button {
     padding: 8px;
 }
-#searchedStock{
+
+#searchedStock {
     gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 10px;
 }
-.stockDiv{
+
+.stockDiv {
     border: 1px solid grey;
-    width: 50%;
+    width: 25%;
     display: flex;
     justify-content: center;
     flex-direction: column;
